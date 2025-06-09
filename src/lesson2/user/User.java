@@ -4,9 +4,10 @@ package lesson2.user;
 import lombok.*;
 
 @AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
+//@NoArgsConstructor
+//@Getter
+//@Setter
+@Builder
 @ToString
 public class User {
     private int id;
