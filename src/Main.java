@@ -1,6 +1,4 @@
-import model.Gender;
-import model.Person;
-import model.User;
+import model.*;
 import util.PersonComparators;
 import util.PersonFactory;
 
@@ -99,5 +97,35 @@ public class Main {
         // First comparing by skill length, then by car length and finally by id
         Set<Person> person2 = PersonFactory.generatePersonSet(10, () -> new TreeSet<>(PersonComparators.BY_SKILLS_CARS_ID));
         person2.forEach(System.out::println);
+
+        System.out.println("----------------------------------------------------");
+        System.out.println("----------------------ZooClub-----------------------");
+        System.out.println("----------------------------------------------------");
+
+        ZooClub zooClub = new ZooClub();
+        Person anna = new Person("Anna", 26);
+        Person ivan = new Person("Ivan", 31);
+
+        Pet rex = new Pet("Cat", "Rex");
+        Pet barsik = new Pet("Dog", "Barsik");
+        Pet persik = new Pet("Hamster", "Persik");
+
+        zooClub.addMember(anna);
+        zooClub.addMember(ivan);
+
+        zooClub.addPetToMember(anna, rex);
+        zooClub.addPetToMember(anna, barsik);
+        zooClub.addPetToMember(anna, persik);
+        zooClub.addPetToMember(ivan, persik);
+
+        System.out.println("------------------Club after adding-----------------");
+        zooClub.showClub();
+
+        System.out.println("-----------------Club after manipulations-----------");
+        zooClub.removePetFromMember(anna, persik);
+        zooClub.showClub();
+        zooClub.removePetFromAll(rex);
+        zooClub.showClub();
+        zooClub.removeMember(ivan);
     }
 }
