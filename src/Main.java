@@ -1,8 +1,11 @@
+import abstractTask.CarOwner;
+import abstractTask.CarWithOwners;
 import model.*;
 import util.PersonComparators;
 import util.PersonFactory;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 public class Main {
     public static void main(String[] args) {
@@ -127,5 +130,43 @@ public class Main {
         zooClub.removePetFromAll(rex);
         zooClub.showClub();
         zooClub.removeMember(ivan);
+
+        System.out.println("----------------------------------------------------");
+        System.out.println("------------------Owners & Cars---------------------");
+        System.out.println("----------------------------------------------------");
+
+        ArrayList<CarWithOwners> cars = new ArrayList<>();
+        cars.add(new CarWithOwners("BMW", 250, new CarOwner("Андрій", 30, 3), 600_000, 2018));
+        cars.add(new CarWithOwners("Audi", 220, new CarOwner("Марина", 28, 6), 550_000, 2019));
+        cars.add(new CarWithOwners("Toyota", 180, new CarOwner("Ігор", 26, 2), 400_000, 2020));
+        cars.add(new CarWithOwners("Ford", 200, new CarOwner("Олег", 35, 10), 430_000, 2017));
+        cars.add(new CarWithOwners("Honda", 190, new CarOwner("Наталя", 32, 4), 410_000, 2018));
+        cars.add(new CarWithOwners("Mercedes", 300, new CarOwner("Сергій", 40, 15), 700_000, 2016));
+        cars.add(new CarWithOwners("Skoda", 150, new CarOwner("Олена", 27, 3), 380_000, 2021));
+        cars.add(new CarWithOwners("Mazda", 170, new CarOwner("Максим", 24, 1), 360_000, 2022));
+        cars.add(new CarWithOwners("Nissan", 160, new CarOwner("Інна", 29, 5), 390_000, 2020));
+        cars.add(new CarWithOwners("Chevrolet", 145, new CarOwner("Тарас", 33, 2), 350_000, 2019));
+
+        cars.forEach(System.out::println);
+
+        // Service
+        IntStream.range(0, cars.size() / 2)
+                .forEach(i -> cars.get(i).engineRepair());
+
+        // Driving courses
+        cars.stream()
+                .map(car -> car.getCarOwner())
+                .filter(owner -> owner.getDrivingExp() < 5 && owner.getAge() > 25)
+                .forEach(owner -> owner.increaseDrivingExp());
+
+        double totalCoast = cars.stream()
+                .mapToDouble(car -> car.getPrice())
+                .sum();
+
+        System.out.println("=== Автопарк ===");
+
+        cars.forEach(System.out::println);
+        System.out.println("Total Coast: " + totalCoast);
+
     }
 }
