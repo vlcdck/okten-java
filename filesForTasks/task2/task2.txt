@@ -1,0 +1,6 @@
+Ivan,24,2
+Jake,15,1
+Vlad,26,2
+Petro,31,3
+Alina,34,4
+Vira,25,2
